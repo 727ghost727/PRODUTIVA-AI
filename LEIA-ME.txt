@@ -1,0 +1,51 @@
+PRODUTIVA.AI V5 — PACOTE DE ATUALIZAÇÃO
+
+ARQUIVOS
+- index.html: nova interface responsiva baseada na V4.
+- axo.png: imagem do mascote Axo utilizada na interface.
+- SUPABASE_AMIZADES.sql: criação das tabelas e políticas de segurança do sistema de amizade.
+
+O QUE MUDOU
+- Formulários de tarefas, metas e hábitos ficam recolhidos e abrem somente quando necessário.
+- Axo aparece na identidade visual, no painel e nas dicas.
+- Configuração de idioma (Português, Inglês e Espanhol). A preferência fica salva no navegador; nesta primeira entrega alguns textos secundários ainda podem aparecer em português.
+- Nova área Amigos: perfil público com nome de usuário, busca, envio/aceitação/recusa/cancelamento de pedidos e lista de amigos.
+- A área social mostra apenas nome público e nome de usuário. Tarefas, metas e hábitos permanecem privados.
+
+IMPORTANTE — ATIVAÇÃO DAS AMIZADES
+1. Faça backup do projeto Supabase.
+2. Entre no Supabase > SQL Editor.
+3. Abra SUPABASE_AMIZADES.sql, copie o conteúdo e execute.
+4. Publique index.html e axo.png juntos na Netlify (mantenha os dois na mesma pasta).
+5. Entre com uma conta existente, abra Amigos e salve um nome de usuário. Para testar pedidos, use duas contas diferentes, cada uma com seu próprio perfil.
+
+SEGURANÇA E COMPATIBILIDADE
+- O pacote reutiliza a URL e a chave pública já usadas na V4.
+- Não apaga, recria ou migra tabelas de tarefas, metas, hábitos ou usuários.
+- O script adiciona somente profiles e friendships, com RLS habilitado.
+- O SQL foi preparado para o Supabase, mas não foi executado no seu projeto nem validado contra o banco ao vivo. Faça backup e aplique conscientemente.
+- O sistema social depende da aplicação do SQL. Sem isso, a área Amigos informará que a configuração está pendente.
+- A preferência de idioma fica salva no dispositivo/navegador, não sincronizada entre dispositivos nesta versão.
+
+PUBLICAÇÃO
+Extraia o ZIP e envie os arquivos da pasta para a Netlify. Não publique somente o index.html: axo.png precisa acompanhar o arquivo.
+
+
+ATUALIZAÇÃO V5.1 — CHAT E RANKINGS
+
+Esta atualização acrescenta chat privado entre amigos aceitos e rankings global/entre amigos (semana, mês e geral), com XP por conquistas.
+
+ATIVAÇÃO NO SUPABASE (necessária):
+1. Faça backup do projeto Supabase.
+2. Se ainda não executou SUPABASE_AMIZADES.sql, execute-o primeiro no SQL Editor.
+3. Execute SUPABASE_CHAT_RANKING.sql no SQL Editor. Ele cria tabelas novas para mensagens e eventos de XP, políticas RLS, gatilhos de pontuação e a função de ranking. Não apaga nem recria as tabelas atuais de tarefas, metas ou hábitos.
+4. Publique juntos index.html e axo.png na Netlify.
+5. Entre com duas contas de teste, crie/aceite amizade e teste mensagens nos dois sentidos. Depois conclua tarefa, hábito e meta para conferir XP.
+
+PONTUAÇÃO: tarefa concluída +10 XP; registro de hábito concluído +5 XP; meta ao atingir 100% +50 XP. Cada item pontua uma única vez, mesmo que seu status seja alterado depois. Nível: 100 XP por nível.
+
+RANKINGS: Global ou apenas amigos; semanal, mensal ou geral. O ranking global usa os perfis públicos cadastrados. O ranking entre amigos inclui o próprio usuário e amizades aceitas.
+
+CHAT: somente usuários com amizade aceita podem trocar mensagens. O histórico é privado aos participantes. A interface atualiza a conversa periodicamente enquanto a área de amizades está aberta.
+
+IMPORTANTE: o pacote foi preparado e o código foi verificado quanto à sintaxe JavaScript, mas a execução do SQL e a integração com o Supabase real precisam ser testadas no seu projeto. Não execute o SQL de novo se houver erro sem antes verificar a mensagem retornada.
